@@ -1,0 +1,56 @@
+body {
+  /* background-color: #91979c; */
+  padding: 5px
+}
+
+
+/* Images List */
+.image-area {
+  height: calc(100% - 170px);
+}
+
+.image-list {
+  height: 100%;
+  max-width: 100%;
+  /* background-color: #fff; */
+  /* margin: 0 5px 0 5px; */
+  overflow: auto;
+}
+
+.list-group-cus {
+  height: 100%;
+  background-color: #fff;
+  border-right: 1px solid rgba(0,0,0,.125);
+}
+
+.list-group-cus > .list-group-item {
+  border: none !important;
+  text-align: center;
+  padding: .25rem .5rem !important;
+}
+
+.image-item {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+.image-canvas {
+  max-height: 100%;
+}
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.upload-button-item {
+   background-color: blanchedalmond;
+   padding: 0px;
+}
+
+
+/* custom tui-editor */
+.tui-image-editor-canvas-container {
+  border: none !important;
+}

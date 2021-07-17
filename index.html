@@ -1,0 +1,247 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Image editor basic</title>
+    <link type="text/css" href="https://uicdn.toast.com/tui-color-picker/v2.2.6/tui-color-picker.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link type="text/css" href="common.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div id="toolbar">
+            <div class="row pb-1 shadow bg-white">
+                <div class="col-8 nopadding">
+
+                    <!-- Get icon svg here
+                    https://icons.getbootstrap.com/ -->
+                    <button type="button" class="btn btn-sm" id="btn-crop" data-bs-toggle="collapse"
+                        data-bs-target="#cropCollapse" aria-expanded="false" aria-controls="cropCollapse">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-crop" viewBox="0 0 16 16">
+                            <path
+                                d="M3.5.5A.5.5 0 0 1 4 1v13h13a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2H3.5a.5.5 0 0 1-.5-.5V4H1a.5.5 0 0 1 0-1h2V1a.5.5 0 0 1 .5-.5zm2.5 3a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4H6.5a.5.5 0 0 1-.5-.5z" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-sm" id="btn-draw-line" data-bs-toggle="collapse"
+                        data-bs-target="#drawLineCollapse" aria-expanded="false" aria-controls="drawLineCollapse">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-pencil" viewBox="0 0 16 16">
+                            <path
+                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn sm" id="btn-draw-shape" data-bs-toggle="collapse"
+                        data-bs-target="#draw-shape-sub-menu" aria-expanded="false"
+                        aria-controls="draw-shape-sub-menu"><i class="fas fa-shapes"></i></button>
+                    <button type="button" class="btn btn-sm" id="btn-add-icon" data-bs-toggle="collapse"
+                        data-bs-target="#iconCollapse" aria-expanded="false" aria-controls="iconCollapse">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            class="bi bi-emoji-smile" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                                d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
+                        </svg>
+                    </button>
+                    <button type="button" class="btn btn-sm" id="btn-text" data-bs-toggle="collapse"
+                        data-bs-target="#textCollapse" aria-expanded="false" aria-controls="textCollapse">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-textarea-t" viewBox="0 0 16 16">
+                            <path d="M1.5 2.5A1.5 1.5 0 0 1 3 1h10a1.5 1.5 0 0 1 1.5 1.5v3.563a2 2 0 0 1 0 3.874V13.5A1.5 1.5 0 0 1 13 15H3a1.5 1.5 0 0 1-1.5-1.5V9.937a2 2 0 0 1 0-3.874V2.5zm1 3.563a2 2 0 0 1 0 3.874V13.5a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V9.937a2 2 0 0 1 0-3.874V2.5A.5.5 0 0 0 13 2H3a.5.5 0 0 0-.5.5v3.563zM2 7a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm12 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                            <path d="M11.434 4H4.566L4.5 5.994h.386c.21-1.252.612-1.446 2.173-1.495l.343-.011v6.343c0 .537-.116.665-1.049.748V12h3.294v-.421c-.938-.083-1.054-.21-1.054-.748V4.488l.348.01c1.56.05 1.963.244 2.173 1.496h.386L11.434 4z"/>
+                          </svg>
+                    </button>
+                    <button type="button" class="btn btn-sm" id="btn-clear-objects">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard-x" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M6.146 7.146a.5.5 0 0 1 .708 0L8 8.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 9l1.147 1.146a.5.5 0 0 1-.708.708L8 9.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 9 6.146 7.854a.5.5 0 0 1 0-.708z"/>
+                            <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+                            <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+                          </svg>
+                    </button>
+                    <button type="button" class="btn btn-sm" id="btn-undo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 1-4.546 2.914.5.5 0 0 0-.908-.417A6 6 0 1 0 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 0-.41-.192L5.23 2.308a.25.25 0 0 0 0 .384l2.36 1.966A.25.25 0 0 0 8 4.466z"/>
+                          </svg>
+                    </button>
+                    <button type="button" class="btn btn-sm" id="btn-redo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                            <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                          </svg>
+                    </button>
+                </div>
+
+                <div class="col-4 text-end nopadding">
+                    <button type="button" class="btn btn-outline-primary btn-sm">Capture</button>
+                    <!-- <button type="button" class="btn btn-primary">Load<input type="file" accept="image/*" id="input-image-file"></button> -->
+                    <button type="button" class="btn btn-outline-primary btn-sm" id="btn-download">Done</button>
+                    <button type="button" class="btn btn-primary btn-sm">Submit</button>
+                </div>
+            </div>
+
+            <div class="row my-1 image-area shadow">
+                <div class="col-xl-1 col-lg-2 col-md-2 col-sm-3 col-3 image-list nopadding">
+                    <ul class="list-group list-group-cus">
+                        <li class="list-group-item upload-button-item">
+                            <label class="btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                    class="bi bi-cloud-upload" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z" />
+                                    <path fill-rule="evenodd"
+                                        d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z" />
+                                </svg>
+                                <input type="file" id="input-image-file" hidden>
+                            </label>
+                        </li>
+                        <div id="container-list-image-data"></div>
+                    </ul>
+                </div>
+                <div class="col-xl-11 col-lg-10 col-md-9 col-sm-8 col-8 image-canvas nopadding">
+                    <div class="collapse" id="cropCollapse" data-bs-parent="#toolbar">
+                        <ul class="menu">
+                            <li class="btn btn-primary" id="btn-apply-crop" data-bs-toggle="collapse"
+                                data-bs-target="#cropCollapse" aria-expanded="false" aria-controls="cropCollapse">Apply
+                            </li>
+                            <li class="btn btn-second" id="btn-cancel-crop" data-bs-toggle="collapse"
+                                data-bs-target="#cropCollapse" aria-expanded="false" aria-controls="cropCollapse">Cancel
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="collapse" id="drawLineCollapse" data-bs-parent="#toolbar">
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <label><input type="radio" class="select-line-type" name="select-line-type"
+                                        value="freeDrawing">
+                                    Free drawing</label>
+                            </li>
+                            <li class="menu-item">
+                                <label><input type="radio" class="select-line-type" name="select-line-type"
+                                        value="lineDrawing">
+                                    Straight line</label>
+                            </li>
+                            <li class="menu-item">
+                                <div id="tui-brush-color-picker">Brush color</div>
+                            </li>
+                            <li class="menu-item"><label class="menu-item no-pointer">Brush width<input
+                                        id="input-brush-width-range" type="range" min="5" max="30" value="12"></label>
+                            </li>
+                            <li class="menu-item close" data-bs-toggle="collapse" data-bs-target="#drawLineCollapse"
+                                aria-expanded="false" aria-controls="drawLineCollapse">Close</li>
+                        </ul>
+                    </div>
+                    <div class="collapse" id="iconCollapse" data-bs-parent="#toolbar">
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <div id="tui-icon-color-picker">Icon color</div>
+                            </li>
+                            <li class="menu-item border" id="btn-register-icon">Register custom icon</li>
+                            <li class="menu-item icon-text" data-icon-type="arrow">➡</li>
+                            <li class="menu-item icon-text" data-icon-type="cancel">✖</li>
+                            <li class="menu-item close" data-bs-toggle="collapse" data-bs-target="#iconCollapse"
+                                aria-expanded="false" aria-controls="iconCollapse">Close</li>
+                        </ul>
+                    </div>
+                    <div class="collapse" id="textCollapse" data-bs-parent="#toolbar">
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <div>
+                                    <button class="btn-text-style" data-style-type="b">Bold</button>
+                                    <button class="btn-text-style" data-style-type="i">Italic</button>
+                                    <button class="btn-text-style" data-style-type="u">Underline</button>
+                                </div>
+                                <div>
+                                    <button class="btn-text-style" data-style-type="l">Left</button>
+                                    <button class="btn-text-style" data-style-type="c">Center</button>
+                                    <button class="btn-text-style" data-style-type="r">Right</button>
+                                </div>
+                            </li>
+                            <li class="menu-item"><label class="no-pointer"><input id="input-font-size-range"
+                                        type="range" min="10" max="100" value="10"></label></li>
+                            <li class="menu-item">
+                                <div id="tui-text-color-picker">Text color</div>
+                            </li>
+                            <li class="menu-item close" data-bs-toggle="collapse" data-bs-target="#textCollapse"
+                                aria-expanded="false" aria-controls="textCollapse">Close</li>
+                        </ul>
+                    </div>
+                    <div class="collapse" id="draw-shape-sub-menu" data-bs-parent="#toolbar">
+                        <ul class="menu">
+                            <li class="menu-item">
+                                <label>
+                                    <input type="radio" name="select-shape-type" value="rect" checked="checked">
+                                    rect
+                                </label>
+                                <label>
+                                    <input type="radio" name="select-shape-type" value="circle">
+                                    circle
+                                </label>
+                                <label>
+                                    <input type="radio" name="select-shape-type" value="triangle">
+                                    triangle
+                                </label>
+                            </li>
+                            <li class="menu-item">
+                                <select name="select-color-type">
+                                    <option value="fill">Fill</option>
+                                    <option value="stroke">Stroke</option>
+                                </select>
+                                <label>
+                                    <input type="radio" name="input-check-fill" id="input-check-transparent"
+                                        value="transparent">
+                                    transparent
+                                </label>
+                                <label>
+                                    <input type="radio" name="input-check-fill" id="input-check-filter" value="filter">
+                                    filter
+                                </label>
+                            </li>
+                            <li class="menu-item">
+                                <label class="menu-item no-pointer">
+                                    Stroke width
+                                    <input id="input-stroke-width-range" type="range" min="0" max="300" value="12">
+                                </label>
+                            </li>
+                            <li class="menu-item">
+                                <div id="tui-shape-color-picker"></div>
+                            </li>
+                            <li class="menu-item close">Close</li>
+                        </ul>
+                    </div>
+                    <div class="tui-image-editor">
+                        <canvas></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-1">
+                <div class="col-12 nopadding">
+                    <input type="text" class="form-control form-control-sm my-1 shadow" placeholder="Title">
+                    <textarea class="form-control form-control-sm shadow" rows="3" placeholder="Description"></textarea>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <script type="text/javascript"
+        src="https://api-storage.cloud.toast.com/v1/AUTH_e18353c4ea5746c097143946d0644e61/toast-ui-cdn/tui-image-editor/v3.11.0/example/fabric-v4.2.0.js"></script>
+    <script type="text/javascript"
+        src="https://uicdn.toast.com/tui.code-snippet/v1.5.0/tui-code-snippet.min.js"></script>
+    <script type="text/javascript"
+        src="https://uicdn.toast.com/tui-color-picker/v2.2.6/tui-color-picker.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+    <script type="text/javascript" src="tui-image-editor.js"></script>
+    <script type="text/javascript" src="common.js"></script>
+</body>
+
+</html>
