@@ -60,12 +60,8 @@ var $selectBlendType = $('[name="select-blend-type"]');
 
 // Image editor
 var imageEditor = new tui.ImageEditor('.tui-image-editor', {
-  cssMaxWidth: 700,
-  cssMaxHeight: 500,
-  selectionStyle: {
-    cornerSize: 20,
-    rotatingPointOffset: 70,
-  },
+  cssMaxWidth: 2000,
+  cssMaxHeight: 1000,
 });
 
 // Color picker for free drawing
