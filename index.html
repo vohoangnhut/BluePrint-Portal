@@ -29,8 +29,8 @@
                         </svg>
                     </button>
 
-                    <button type="color" class="btn btn-sm" id="btn-" data-bs-toggle="popover" data-bs-container="body"
-                        data-bs-target="#Collapse" aria-expanded="false" aria-controls="Collapse">
+                    <button type="button" class="btn btn-sm" data-bs-toggle="collapse"
+                        data-bs-target="#commonColorCollapse" aria-expanded="false" aria-controls="commonColorCollapse">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                             class="bi bi-palette-fill" viewBox="0 0 16 16">
                             <path
@@ -137,7 +137,7 @@
                             </div>
                             <div class="sub-tool-area">
                                 <ul class="menu nopadding">
-           
+
                                     <button type="button" id="btn-apply-crop" class="btn btn-outline-primary btn-sm"
                                         data-bs-toggle="collapse" data-bs-target="#cropCollapse" aria-expanded="false"
                                         aria-controls="cropCollapse"><svg xmlns="http://www.w3.org/2000/svg" width="20"
@@ -164,6 +164,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="collapse" id="commonColorCollapse" data-bs-parent="#toolbar">
+                        <div id="drap-div-common-color" class="drap-div">
+                            <div id="drap-div-common-color-header" class="drap-div-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-grip-vertical" viewBox="0 0 16 16">
+                                    <path
+                                        d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                </svg>
+                            </div>
+                            <div class="sub-tool-area">
+                                <ul class="menu nopadding">
+                                    <div id="tui-common-color-picker"></div>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     <div class="collapse" id="drawLineCollapse" data-bs-parent="#toolbar">
                         <div id="drap-div-draw" class="drap-div">
                             <div id="drap-div-draw-header" class="drap-div-header">
@@ -177,29 +193,36 @@
                                 <ul class="menu nopadding">
                                     <div class="row">
                                         <div class="col-auto">
-                                            <label><input type="radio" class="select-line-type" name="select-line-type"
-                                                    value="freeDrawing">
-                                                Free drawing</label>
+                                            <input type="radio" class="btn-check" name="select-line-type"
+                                                id="freeHighlightOption" value="freeDrawing" autocomplete="off">
+                                            <label class="btn btn-secondary" for="freeHighlightOption">Free
+                                                Highlight</label>
                                         </div>
                                         <div class="col-auto">
-                                            <label><input type="radio" class="select-line-type" name="select-line-type"
-                                                    value="lineDrawing">
-                                                Straight line</label>
+                                            <input type="radio" class="btn-check" name="select-line-type"
+                                                id="highlightOption" value="lineDrawing" autocomplete="off">
+                                            <label class="btn btn-secondary" for="highlightOption">Highlight</label>
+                                        </div>
+                                        <div class="col-auto">
+                                            <input type="radio" class="btn-check" name="select-line-type"
+                                                id="arrowOption" value="arrowDrawing" autocomplete="off">
+                                            <label class="btn btn-secondary" for="arrowOption">Arrow</label>
+                                        </div>
+                                        <div class="col-auto">
+                                            <input type="radio" class="btn-check" name="select-line-type"
+                                                id="arrow2PointDrawingOption" value="arrow2PointDrawing"
+                                                autocomplete="off">
+                                            <label class="btn btn-secondary" for="arrow2PointDrawingOption">Arrow 2
+                                                Point</label>
                                         </div>
                                     </div>
-                                   
+
                                     <div class="row py-1">
                                         <div class="col-auto">
                                             <label class="menu-item no-pointer">Brush width<input
                                                     id="input-brush-width-range" type="range" min="5" max="30"
                                                     value="12"></label>
 
-                                        </div>
-                                    </div>
-
-                                    <div class="row py-1">
-                                        <div class="col-auto">
-                                            <div id="tui-brush-color-picker"></div>
                                         </div>
                                     </div>
 
@@ -236,71 +259,175 @@
                         </ul>
                     </div> -->
                     <div class="collapse" id="textCollapse" data-bs-parent="#toolbar">
-                        <ul class="menu">
-                            <li class="menu-item">
-                                <div>
-                                    <button class="btn-text-style" data-style-type="b">Bold</button>
-                                    <button class="btn-text-style" data-style-type="i">Italic</button>
-                                    <button class="btn-text-style" data-style-type="u">Underline</button>
-                                </div>
-                                <div>
-                                    <button class="btn-text-style" data-style-type="l">Left</button>
-                                    <button class="btn-text-style" data-style-type="c">Center</button>
-                                    <button class="btn-text-style" data-style-type="r">Right</button>
-                                </div>
-                            </li>
-                            <li class="menu-item"><label class="no-pointer"><input id="input-font-size-range"
-                                        type="range" min="10" max="100" value="10"></label></li>
-                            <li class="menu-item">
-                                <div id="tui-text-color-picker">Text color</div>
-                            </li>
-                            <li class="menu-item close" data-bs-toggle="collapse" data-bs-target="#textCollapse"
-                                aria-expanded="false" aria-controls="textCollapse">Close</li>
-                        </ul>
+                        <div id="drap-div-text" class="drap-div">
+                            <div id="drap-div-text-header" class="drap-div-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-grip-vertical" viewBox="0 0 16 16">
+                                    <path
+                                        d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                </svg>
+                            </div>
+                            <div class="sub-tool-area">
+                                <ul class="menu nopadding">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <button class="btn-text-style" data-style-type="b"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-type-bold" viewBox="0 0 16 16">
+                                                <path d="M8.21 13c2.106 0 3.412-1.087 3.412-2.823 0-1.306-.984-2.283-2.324-2.386v-.055a2.176 2.176 0 0 0 1.852-2.14c0-1.51-1.162-2.46-3.014-2.46H3.843V13H8.21zM5.908 4.674h1.696c.963 0 1.517.451 1.517 1.244 0 .834-.629 1.32-1.73 1.32H5.908V4.673zm0 6.788V8.598h1.73c1.217 0 1.88.492 1.88 1.415 0 .943-.643 1.449-1.832 1.449H5.907z"/>
+                                              </svg></button>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button class="btn-text-style" data-style-type="i"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-type-italic" viewBox="0 0 16 16">
+                                                <path d="M7.991 11.674 9.53 4.455c.123-.595.246-.71 1.347-.807l.11-.52H7.211l-.11.52c1.06.096 1.128.212 1.005.807L6.57 11.674c-.123.595-.246.71-1.346.806l-.11.52h3.774l.11-.52c-1.06-.095-1.129-.211-1.006-.806z"/>
+                                              </svg></button>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button class="btn-text-style" data-style-type="u"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-type-underline" viewBox="0 0 16 16">
+                                                <path d="M5.313 3.136h-1.23V9.54c0 2.105 1.47 3.623 3.917 3.623s3.917-1.518 3.917-3.623V3.136h-1.23v6.323c0 1.49-.978 2.57-2.687 2.57-1.709 0-2.687-1.08-2.687-2.57V3.136zM12.5 15h-9v-1h9v1z"/>
+                                              </svg></button>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <button class="btn-text-style" data-style-type="l"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-text-left" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                                              </svg></button>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button class="btn-text-style" data-style-type="c"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-text-center" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M4 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                                              </svg></button>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button class="btn-text-style" data-style-type="r"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-text-right" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+                                              </svg></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row py-1">
+                                        <div class="col-auto">
+                                            <label class="no-pointer"><input id="input-font-size-range" type="range"
+                                                    min="10" max="100" value="10"></label>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row py-1">
+                                        <div class="text-center">
+                                            <button type="button" class="btn btn-outline-danger btn-sm"
+                                                data-bs-toggle="collapse" data-bs-target="#textCollapse"
+                                                aria-expanded="false" aria-controls="textCollapse"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                    <path
+                                                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                                </svg></button>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                     <div class="collapse" id="shapeCollapse" data-bs-parent="#toolbar">
-                        <ul class="menu">
-                            <li class="menu-item">
-                                <label>
-                                    <input type="radio" name="select-shape-type" value="rect" checked="checked">
-                                    rect
-                                </label>
-                                <label>
-                                    <input type="radio" name="select-shape-type" value="circle">
-                                    circle
-                                </label>
-                                <label>
-                                    <input type="radio" name="select-shape-type" value="triangle">
-                                    triangle
-                                </label>
-                            </li>
-                            <li class="menu-item">
-                                <select name="select-color-type">
-                                    <option value="fill">Fill</option>
-                                    <option value="stroke">Stroke</option>
-                                </select>
-                                <label>
-                                    <input type="radio" name="input-check-fill" id="input-check-transparent"
-                                        value="transparent">
-                                    transparent
-                                </label>
-                                <label>
-                                    <input type="radio" name="input-check-fill" id="input-check-filter" value="filter">
-                                    filter
-                                </label>
-                            </li>
-                            <li class="menu-item">
-                                <label class="menu-item no-pointer">
-                                    Stroke width
-                                    <input id="input-stroke-width-range" type="range" min="0" max="300" value="12">
-                                </label>
-                            </li>
-                            <li class="menu-item">
-                                <div id="tui-shape-color-picker"></div>
-                            </li>
-                            <li class="menu-item close" data-bs-toggle="collapse" data-bs-target="#shapeCollapse"
-                                aria-expanded="false" aria-controls="shapeCollapse">Close</li>
-                        </ul>
+                        <div id="drap-div-shape" class="drap-div">
+                            <div id="drap-div-shape-header" class="drap-div-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-grip-vertical" viewBox="0 0 16 16">
+                                    <path
+                                        d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                </svg>
+                            </div>
+                            <div class="sub-tool-area">
+                                <ul class="menu nopadding">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <input type="radio" class="btn-check" name="select-shape-type"
+                                                id="rectOption" value="rect" autocomplete="off" checked>
+                                            <label class="btn btn-secondary" for="rectOption">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file" viewBox="0 0 16 16">
+                                                    <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+                                                  </svg>
+                                            </label>
+                                        </div>
+                                        <div class="col-auto">
+                                            <input type="radio" class="btn-check" name="select-shape-type"
+                                                id="circleOption" value="circle" autocomplete="off">
+                                            <label class="btn btn-secondary" for="circleOption">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-circle" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                </svg>
+                                            </label>
+                                        </div>
+                                        <div class="col-auto">
+                                            <input type="radio" class="btn-check" name="select-shape-type"
+                                                id="triangleOption" value="triangle" autocomplete="off">
+                                            <label class="btn btn-secondary" for="triangleOption">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-triangle" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
+                                                </svg>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row py-1">
+                                        <div class="col-auto">
+                                            <div id="tui-shape-color-picker"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row py-1">
+                                        <div class="col-auto">
+                                            <select name="select-color-type">
+                                                <option value="fill">Fill</option>
+                                                <option value="stroke">Stroke</option>
+                                            </select>
+                                            <label>
+                                                <input type="radio" name="input-check-fill" id="input-check-transparent"
+                                                    value="transparent">
+                                                Transparent
+                                            </label>
+                                            <label>
+                                                <input type="radio" name="input-check-fill" id="input-check-filter"
+                                                    value="filter">
+                                                Pixelate
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row py-1">
+                                        <div class="col-auto">
+                                            <label class="menu-item no-pointer">
+                                                Stroke width
+                                                <input id="input-stroke-width-range" type="range" min="0" max="300"
+                                                    value="1">
+                                            </label>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row py-1">
+                                        <div class="text-center">
+                                            <button type="button" class="btn btn-outline-danger btn-sm"
+                                                data-bs-toggle="collapse" data-bs-target="#shapeCollapse"
+                                                aria-expanded="false" aria-controls="shapeCollapse"><svg
+                                                    xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                    fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                                    <path
+                                                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                                </svg></button>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="tui-image-editor"></div>
