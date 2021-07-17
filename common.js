@@ -351,6 +351,7 @@ $inputImage.on('change', function (event) {
   });
 
   const reader = new FileReader();
+
   reader.onload = (event) => {
     const tempImg = document.createElement('img');
     tempImg.addEventListener('load', (e) => {
@@ -610,8 +611,6 @@ function loadListImage() {
     liElement.setAttribute('class', 'list-group-item');
 
     liElement.addEventListener('click', (e) => {
-      console.log(arrImg);
-      console.log(imageDataIdxSelected);
       var dataURL = imageEditor.toDataURL();
 
       if (dataURL !== arrImg[imageDataIdxSelected].data) {
