@@ -36,8 +36,8 @@
                         </svg>
                     </button>
                     <button type="button" class="btn sm" id="btn-draw-shape" data-bs-toggle="collapse"
-                        data-bs-target="#draw-shape-sub-menu" aria-expanded="false"
-                        aria-controls="draw-shape-sub-menu"><i class="fas fa-shapes"></i></button>
+                        data-bs-target="#shapeCollapse" aria-expanded="false" aria-controls="shapeCollapse"><i
+                            class="fas fa-shapes"></i></button>
                     <!-- <button type="button" class="btn btn-sm" id="btn-add-icon" data-bs-toggle="collapse"
                         data-bs-target="#iconCollapse" aria-expanded="false" aria-controls="iconCollapse">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -116,8 +116,8 @@
                 </div>
                 <div class="col-xl-11 col-lg-10 col-md-9 col-sm-8 col-8 image-canvas nopadding">
                     <div class="collapse" id="cropCollapse" data-bs-parent="#toolbar">
-                        <div id="drap-div">
-                            <div id="drap-div-header">
+                        <div id="drap-div-crop" class="drap-div">
+                            <div id="drap-div-crop-header" class="drap-div-header">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-grip-vertical" viewBox="0 0 16 16">
                                     <path
@@ -153,28 +153,52 @@
                         </div>
                     </div>
                     <div class="collapse" id="drawLineCollapse" data-bs-parent="#toolbar">
+                        <div id="drap-div-draw" class="drap-div">
+                            <div id="drap-div-draw-header" class="drap-div-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-grip-vertical" viewBox="0 0 16 16">
+                                    <path
+                                        d="M7 2a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-3 3a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                                </svg>
+                            </div>
+                            <div class="sub-tool-area">
+                                <ul class="menu nopadding">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <label><input type="radio" class="select-line-type" name="select-line-type"
+                                                    value="freeDrawing">
+                                                Free drawing</label>
+                                        </div>
+                                        <div class="col-auto">
+                                            <label><input type="radio" class="select-line-type" name="select-line-type"
+                                                    value="lineDrawing">
+                                                Straight line</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <div id="tui-brush-color-picker"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <label class="menu-item no-pointer">Brush width<input
+                                                    id="input-brush-width-range" type="range" min="5" max="30"
+                                                    value="12"></label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <button type="button" class="btn btn-outline-primary btn-sm"
+                                                data-bs-toggle="collapse" data-bs-target="#drawLineCollapse"
+                                                aria-expanded="false" aria-controls="drawLineCollapse">Close</button>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                        </div>
 
-                        <ul class="menu nopadding">
-                            <li class="menu-item">
-                                <label><input type="radio" class="select-line-type" name="select-line-type"
-                                        value="freeDrawing">
-                                    Free drawing</label>
-                            </li>
-                            <li class="menu-item">
-                                <label><input type="radio" class="select-line-type" name="select-line-type"
-                                        value="lineDrawing">
-                                    Straight line</label>
-                            </li>
-                            <li class="menu-item">
-                                <div id="tui-brush-color-picker">Brush color</div>
-                            </li>
-                            <li class="menu-item"><label class="menu-item no-pointer">Brush width<input
-                                        id="input-brush-width-range" type="range" min="5" max="30" value="12"></label>
-                            </li>
-                            <li class="menu-item close" data-bs-toggle="collapse" data-bs-target="#drawLineCollapse"
-                                aria-expanded="false" aria-controls="drawLineCollapse">Close</li>
-                        </ul>
-                        
+
                     </div>
                     <!-- <div class="collapse" id="iconCollapse" data-bs-parent="#toolbar">
                         <ul class="menu">
@@ -211,7 +235,7 @@
                                 aria-expanded="false" aria-controls="textCollapse">Close</li>
                         </ul>
                     </div>
-                    <div class="collapse" id="draw-shape-sub-menu" data-bs-parent="#toolbar">
+                    <div class="collapse" id="shapeCollapse" data-bs-parent="#toolbar">
                         <ul class="menu">
                             <li class="menu-item">
                                 <label>
@@ -251,7 +275,8 @@
                             <li class="menu-item">
                                 <div id="tui-shape-color-picker"></div>
                             </li>
-                            <li class="menu-item close">Close</li>
+                            <li class="menu-item close" data-bs-toggle="collapse" data-bs-target="#shapeCollapse"
+                                aria-expanded="false" aria-controls="shapeCollapse">Close</li>
                         </ul>
                     </div>
 

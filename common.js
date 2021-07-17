@@ -6,6 +6,7 @@ var shapeType;
 var activeObjectId;
 var arrImg = []; // {idx, data}
 var imageDataIdxSelected;
+var arrIdPopupControl = ['crop', 'draw'];
 
 // Buttons
 var $btns = $('.menu-item');
@@ -631,19 +632,17 @@ function loadListImage() {
   }
 }
 
-
-
-
-dragElement(document.getElementById("drap-div"));
+function initEventDragPopupControl() {
+  for(var i = 0; i < arrIdPopupControl.length; i++){
+    dragElement(document.getElementById("drap-div-" + arrIdPopupControl[i]));
+  }
+}
 
 function dragElement(elmnt) {
   var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (document.getElementById(elmnt.id + "-header")) {
     // if present, the header is where you move the DIV from:
     document.getElementById(elmnt.id + "-header").onmousedown = dragMouseDown;
-  } else {
-    // otherwise, move the DIV from anywhere inside the DIV:
-    elmnt.onmousedown = dragMouseDown;
   }
 
   function dragMouseDown(e) {
@@ -676,3 +675,5 @@ function dragElement(elmnt) {
     document.onmousemove = null;
   }
 }
+
+initEventDragPopupControl();

@@ -2,14 +2,14 @@ body {
   padding: 5px;
 }
 
-#drap-div {
+.drap-div {
   position: absolute;
   z-index: 9;
   text-align: center;
   display: flex;
 }
 
-#drap-div-header {
+.drap-div-header {
   padding: 10px;
   cursor: move;
   z-index: 10;
