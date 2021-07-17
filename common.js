@@ -352,12 +352,26 @@ $inputImage.on('change', function (event) {
 
   const reader = new FileReader();
   reader.onload = (event) => {
-    arrImg.push({
-      idx: arrImg.length,
-      data: event.target.result
+    const tempImg = document.createElement('img');
+    tempImg.addEventListener('load', (e) => {
+      const tempCanvas = document.createElement('canvas');
+      const context = tempCanvas.getContext('2d');
+
+      tempCanvas.width = e.target.width;
+      tempCanvas.height = e.target.height;
+
+      context.drawImage(e.target, 0, 0, tempCanvas.width, tempCanvas.height);
+
+      arrImg.push({
+        idx: arrImg.length,
+        data: tempCanvas.toDataURL()
+      });
+      
+      loadListImage();
+
+      imageDataIdxSelected = arrImg.length - 1;
     });
-    loadListImage();
-    imageDataIdxSelected = arrImg.length - 1;
+    tempImg.setAttribute('src', event.target.result);
   };
   reader.readAsDataURL(file);
 });
@@ -596,6 +610,8 @@ function loadListImage() {
     liElement.setAttribute('class', 'list-group-item');
 
     liElement.addEventListener('click', (e) => {
+      console.log(arrImg);
+      console.log(imageDataIdxSelected);
       var dataURL = imageEditor.toDataURL();
 
       if (dataURL !== arrImg[imageDataIdxSelected].data) {
