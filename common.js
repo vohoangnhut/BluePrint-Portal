@@ -6,7 +6,7 @@ var shapeType;
 var activeObjectId;
 var arrImg = []; // {idx, data}
 var imageDataIdxSelected;
-var arrIdPopupControl = ['crop', 'draw'];
+var arrIdPopupControl = ['crop', 'draw', 'common-color', 'shape', 'text'];
 
 // Buttons
 var $btns = $('.menu-item');
@@ -19,7 +19,6 @@ var $btnRedo = $('#btn-redo');
 var $btnClearObjects = $('#btn-clear-objects');
 var $btnRemoveActiveObject = $('#btn-remove-active-object');
 var $btnCrop = $('#btn-crop');
-var $btnDrawLine = $('#btn-draw-line');
 var $btnDrawShape = $('#btn-draw-shape');
 var $btnApplyCrop = $('#btn-apply-crop');
 var $btnCancelCrop = $('#btn-cancel-crop');
@@ -40,8 +39,6 @@ var $inputCheckFilter = $('#input-check-filter');
 // Sub menus
 var $displayingSubMenu = $();
 var $cropSubMenu = $('#crop-sub-menu');
-var $freeDrawingSubMenu = $('#free-drawing-sub-menu');
-var $drawLineSubMenu = $('#draw-line-sub-menu');
 var $drawShapeSubMenu = $('#draw-shape-sub-menu');
 var $textSubMenu = $('#text-sub-menu');
 // var $iconSubMenu = $('#icon-sub-menu');
@@ -65,15 +62,9 @@ var imageEditor = new tui.ImageEditor('.tui-image-editor', {
   cssMaxHeight: 1000,
 });
 
-// Color picker for free drawing
-var brushColorpicker = tui.colorPicker.create({
-  container: $('#tui-brush-color-picker')[0],
-  color: '#000000',
-});
-
-// Color picker for text palette
-var textColorpicker = tui.colorPicker.create({
-  container: $('#tui-text-color-picker')[0],
+// Color picker for common
+var commonColorpicker = tui.colorPicker.create({
+  container: $('#tui-common-color-picker')[0],
   color: '#000000',
 });
 
@@ -131,12 +122,15 @@ function resizeEditor() {
 
 function getBrushSettings() {
   var brushWidth = parseInt($inputBrushWidthRange.val(), 10);
-  var brushColor = brushColorpicker.getColor();
 
   return {
     width: brushWidth,
-    color: hexToRGBa(brushColor, 0.5),
+    color: getCommonColor(),
   };
+}
+
+function getCommonColor() {
+  return hexToRGBa(commonColorpicker.getColor(), 0.5);
 }
 
 function activateShapeMode() {
@@ -386,13 +380,6 @@ $btnDownload.on('click', function () {
 });
 
 // control draw line mode
-$btnDrawLine.on('click', function () {
-  imageEditor.stopDrawingMode();
-  $displayingSubMenu.hide();
-  $displayingSubMenu = $drawLineSubMenu.show();
-  $selectLine.eq(0).change();
-});
-
 $selectLine.on('change', function () {
   var mode = $(this).val();
   var settings = getBrushSettings();
@@ -400,14 +387,32 @@ $selectLine.on('change', function () {
   imageEditor.stopDrawingMode();
   if (mode === 'freeDrawing') {
     imageEditor.startDrawingMode('FREE_DRAWING', settings);
-  } else {
+  } else if (mode === 'lineDrawing') {
+    settings.width = 25;
+    imageEditor.startDrawingMode('LINE_DRAWING', settings);
+  } else if (mode === 'arrowDrawing') {
+    settings.width = 6;
+    settings.arrowType = {
+      tail: 'chevron' // triangle
+    };
+    imageEditor.startDrawingMode('LINE_DRAWING', settings);
+  } else if (mode === 'arrow2PointDrawing') {
+    settings.width = 6;
+    settings.arrowType = {
+      tail: 'chevron', // triangle
+      head: 'chevron' // triangle
+    };
     imageEditor.startDrawingMode('LINE_DRAWING', settings);
   }
 });
 
-brushColorpicker.on('selectColor', function (event) {
+commonColorpicker.on('selectColor', function (event) {
   imageEditor.setBrush({
     color: hexToRGBa(event.color, 0.5),
+  });
+
+  imageEditor.changeTextStyle(activeObjectId, {
+    fill: event.color,
   });
 });
 
@@ -537,12 +542,6 @@ $btnTextStyle.on('click', function (e) {
   }
 
   imageEditor.changeTextStyle(activeObjectId, styleObj);
-});
-
-textColorpicker.on('selectColor', function (event) {
-  imageEditor.changeTextStyle(activeObjectId, {
-    fill: event.color,
-  });
 });
 
 // control icon
